@@ -1,0 +1,64 @@
+{
+  "scenes": [
+    {
+      "layout": "dark background digital display",
+      "elements": [
+        {
+          "description": "Profile icon with abstract design",
+          "position": "center",
+          "style": "multicolored with pastel shades"
+        },
+        {
+          "description": "Text: 'Agent'",
+          "position": "center-right",
+          "style": "white font, medium size"
+        }
+      ]
+    },
+    {
+      "layout": "dark background digital display",
+      "elements": [
+        {
+          "description": "Profile icon with abstract design",
+          "position": "center-left",
+          "style": "multicolored with pastel shades"
+        },
+        {
+          "description": "Text: 'Agent'",
+          "position": "center",
+          "style": "white font, medium size"
+        },
+        {
+          "description": "Text: '7am — Initiate hourly tasks'",
+          "position": "center-right",
+          "style": "light gray font, small size"
+        }
+      ]
+    },
+    {
+      "layout": "dark background digital display",
+      "elements": [
+        {
+          "description": "Profile icon with abstract design",
+          "position": "center-left",
+          "style": "multicolored with pastel shades"
+        },
+        {
+          "description": "Text: 'Agent'",
+          "position": "center",
+          "style": "white font, medium size"
+        },
+        {
+          "description": "Text: '7am — Initiate hourly tasks'",
+          "position": "center-right",
+          "style": "light gray font, small size"
+        },
+        {
+          "description": "Text: 'I need to check emails to see which ones need responses'",
+          "position": "center-right",
+          "style": "light gray font, small size"
+        }
+      ]
+    }
+  ]
+}

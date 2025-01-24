@@ -1,0 +1,27 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="800" height="400">
+  <rect x="0" y="0" width="800" height="400" fill="#000000"/>
+  <defs>
+    <radialGradient id="profileGradient">
+      <stop offset="0%" stop-color="#FFB6C1"/>
+      <stop offset="50%" stop-color="#ADD8E6"/>
+      <stop offset="100%" stop-color="#90EE90"/>
+    </radialGradient>
+  </defs>
+  <circle id="profileIcon" cx="400" cy="200" r="50" fill="url(#profileGradient)" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1000ms" dur="500ms" fill="freeze"/>
+    <animate attributeName="cx" from="400" to="200" begin="2000ms" dur="500ms" fill="freeze" />
+  </circle>
+  <text id="agentText" x="600" y="200" fill="#FFFFFF" font-size="24px" font-family="Arial" text-anchor="middle" alignment-baseline="middle" opacity="0">
+    Agent
+    <animate attributeName="opacity" from="0" to="1" begin="1000ms" dur="500ms" fill="freeze"/>
+    <animate attributeName="x" from="600" to="400" begin="2000ms" dur="500ms" fill="freeze" />
+  </text>
+  <text id="taskText" x="600" y="200" fill="#D3D3D3" font-size="16px" font-family="Arial" text-anchor="middle" alignment-baseline="middle" opacity="0">
+    7am — Initiate hourly tasks
+    <animate attributeName="opacity" from="0" to="1" begin="2000ms" dur="500ms" fill="freeze" />
+  </text>
+  <text id="emailText" x="600" y="220" fill="#D3D3D3" font-size="16px" font-family="Arial" text-anchor="middle" alignment-baseline="middle" opacity="0">
+    I need to check emails to see which ones need responses
+    <animate attributeName="opacity" from="0" to="1" begin="3000ms" dur="500ms" fill="freeze" />
+  </text>
+</svg>
