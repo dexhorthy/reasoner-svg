@@ -92,7 +92,7 @@ async function validateAndFixSVG(output: SVG): Promise<string> {
           errorMessage
         );
         lastError = errorMessage;
-        const fixed = await b.FixSVG(workingCopy, errorMessage);
+        const fixed = await b.FixSVGR1(workingCopy, errorMessage);
         workingCopy = fixed; // Update output for next attempt if needed
       } else {
         return workingCopy.svg; // Valid SVG found, return immediately
@@ -103,7 +103,7 @@ async function validateAndFixSVG(output: SVG): Promise<string> {
         error
       );
       lastError = error.message;
-      const fixed = await b.FixSVG(workingCopy, error.message);
+      const fixed = await b.FixSVGR1(workingCopy, error.message);
       workingCopy = fixed; // Update output for next attempt if needed
     }
 
@@ -118,28 +118,34 @@ async function validateAndFixSVG(output: SVG): Promise<string> {
 }
 
 const main = async () => {
-  //   const output = await b.RenderScene(scene1);
-  const animation: Animation = {
-    scenes: [],
-  };
-  for (const image of images) {
-    console.log("processing image", image.path);
+  const fromJson = process.argv.includes("--from-json");
+  let animation: Animation;
+
+  if (fromJson) {
+    console.log("Reading animation from animation.json");
     const fs = require("fs").promises;
-    const imageData = await fs.readFile(image.path);
-    const base64Data = imageData.toString("base64");
-    const scene = await b.PictureToScene(
-      BamlImage.fromBase64("image/png", base64Data),
-      animation
-    );
-    console.log("extracted scene", JSON.stringify(scene, null, 2));
-    animation.scenes.push(scene);
+    const jsonData = await fs.readFile("animation.json", "utf-8");
+    animation = JSON.parse(jsonData);
+  } else {
+    animation = { scenes: [] };
+    for (const image of images) {
+      console.log("processing image", image.path);
+      const fs = require("fs").promises;
+      const imageData = await fs.readFile(image.path);
+      const base64Data = imageData.toString("base64");
+      const scene = await b.PictureToScene(
+        BamlImage.fromBase64("image/png", base64Data),
+        animation
+      );
+      console.log("extracted scene", JSON.stringify(scene, null, 2));
+      animation.scenes.push(scene);
+    }
+    const fs = require("fs").promises;
+    await fs.writeFile("animation.json", JSON.stringify(animation, null, 2));
   }
-  const fs = require("fs").promises;
-  await fs.writeFile("animation.json", JSON.stringify(animation, null, 2));
 
   console.log(`rendering animation with ${animation.scenes.length} scenes`);
-
-  const output = await b.RenderAnimationStructured(animation);
+  const output = await b.RenderAnimationStructuredR1(animation);
   const validSvg = await validateAndFixSVG(output);
   await fs.writeFile("output.svg", validSvg);
   console.log("wrote to output.svg");

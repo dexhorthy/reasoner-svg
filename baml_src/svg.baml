@@ -111,6 +111,24 @@ function RenderAnimationStructured(animation: Animation) -> SVG {
   "#
 }
 
+function RenderAnimationR1(animation: Animation) -> string {
+  client DeepseekR1
+  prompt #"
+     {{Prompt(animation)}}
+     {{ ctx.output_format }}
+
+  "#
+}
+
+function RenderAnimationStructuredR1(animation: Animation) -> SVG {
+  client DeepseekR1
+  prompt #"
+     {{Prompt(animation)}}
+     {{ ctx.output_format }}
+
+  "#
+}
+
 test ThreeElements {
   functions [RenderAnimation]
   args {
@@ -168,7 +186,7 @@ test ThreeElements {
 
 
 test FadeInOut {
-  functions [RenderAnimation]
+  functions [RenderAnimation, RenderAnimationR1]
   args {
     animation {
         scenes [
@@ -392,6 +410,24 @@ test TestExtractSceneWithPrevious {
   }
 }
 
+function FixSVGR1(svg: SVG, error: string) -> SVG {
+  client DeepseekR1
+  prompt #"
+    {{ _.role("system") }}
+
+    you are an expert at fixing SVGs
+
+    {{ _.role("user") }}
+
+    Here is the error:
+
+    {{ error }}
+
+    Here is the SVG:
+
+    {{ svg }}
+  "#
+}
 
 function FixSVG(svg: SVG, error: string) -> SVG {
   client O1

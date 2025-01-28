@@ -15,3 +15,12 @@ client<llm> O1 {
     api_key env.OPENAI_API_KEY
   }
 }
+
+client<llm> DeepseekR1 {
+  provider openai-generic
+  options {
+    model "deepseek/deepseek-r1"
+    base_url "https://openrouter.ai/api/v1"
+    api_key env.OPENROUTER_API_KEY
+  }
+}
